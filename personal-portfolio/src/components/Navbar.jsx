@@ -55,6 +55,7 @@ export default function Navbar() {
 
         {/* Meniu mobile cu animatie */}
         <div
+        aria-label="menu"
           className={`
             absolute top-16 left-0 w-52
             bg-white/30 dark:bg-black/30 backdrop-blur-xl

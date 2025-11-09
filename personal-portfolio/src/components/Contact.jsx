@@ -49,15 +49,16 @@ export default function ContactPage() {
         onSubmit={handleSubmit}
         className="w-full sm:w-full md:w-auto p-6 sm:p-8 md:p-8 rounded-3xl backdrop-blur-2xl dark:text-white bg-neutral-500/10 border border-white/20 shadow-xl space-y-4 sm:space-y-5 md:space-y-6 transition-all"
       >
-        <h1 className="text-3xl sm:text-4xl md:text-4xl font-bold dark:text-white text-neutral-500 text-center mb-2 drop-shadow">
+        <h1 aria-label="text" className="text-3xl sm:text-4xl md:text-4xl font-bold dark:text-white text-neutral-500 text-center mb-2 drop-shadow">
           Contact
         </h1>
-        <p className="text-center dark:text-white text-neutral-400 text-xs sm:text-sm md:text-sm -mt-2 sm:-mt-3 mb-4 sm:mb-6">
+        <p aria-label="text" className="text-center dark:text-white text-neutral-400 text-xs sm:text-sm md:text-sm -mt-2 sm:-mt-3 mb-4 sm:mb-6">
           Spune-mi cu ce te pot ajuta – răspund cât pot de repede.
         </p>
 
         <input
           type="text"
+          aria-label="text"
           placeholder="Numele tău"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
@@ -67,6 +68,7 @@ export default function ContactPage() {
         <input
           type="email"
           placeholder="Email"
+          aria-label="text"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
           className="w-full p-2.5 sm:p-3 rounded-xl dark:text-white dark:placeholder-white bg-neutral-600/10 border border-white/20 text-neutral-500 placeholder-neutral-500 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/30 transition"
@@ -76,11 +78,13 @@ export default function ContactPage() {
           placeholder="Mesajul tău"
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
+          aria-label="text"
           className="w-full h-24 sm:h-32 p-2.5 sm:p-3 rounded-xl dark:text-white dark:placeholder-white bg-neutral-600/10 border border-white/20 text-neutral-500 placeholder-neutral-500 text-sm sm:text-base resize-none focus:outline-none focus:ring-2 focus:ring-white/30 transition"
         />
 
         <button
           type="submit"
+          aria-label="text"
           className="w-full p-2.5 sm:p-3 rounded-xl border border-white/20 dark:text-white dark:placeholder-white bg-neutral-600/10 text-neutral-500 text-sm sm:text-base font-semibold hover:bg-white/30 active:scale-95 transition-all"
         >
           Trimite mesajul
