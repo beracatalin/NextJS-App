@@ -1,22 +1,26 @@
 'use client';
 
 import ThemeToggle from "@/theme/theme-toggle";
-import Image from "next/image"; // Next.js Image pentru optimizare
+import Image from "next/image";
 import Carousel from "./Carousel";
 import ContactPage from "./Contact";
 
 export default function Hero() {
   return (
     <>
-      {/* Background */}
-      <div className="fixed w-full h-auto inset-0 -z-50">
-        <div className="absolute inset-0">
+      {/* ================= HERO ================= */}
+      <section
+        id="hero"
+        className="relative w-full min-h-screen flex flex-col justify-center items-center px-4 text-center"
+      >
+        {/* Background */}
+        <div className="fixed w-full h-full inset-0 -z-50">
           <Image
             src="/background/light.png"
             alt="Fundal light"
             fill
             className="object-cover dark:opacity-0 transition-opacity duration-1000"
-            priority // optimizare LCP
+            priority
           />
           <Image
             src="/background/dark.png"
@@ -26,13 +30,7 @@ export default function Hero() {
             priority
           />
         </div>
-      </div>
 
-      {/* ================= HERO ================= */}
-      <section
-        id="hero"
-        className="space-x-section w-full min-h-screen flex flex-col justify-center items-center px-4 text-center"
-      >
         {/* Theme Toggle */}
         <span className="fixed top-4 sm:top-6 md:top-10 right-4 z-50">
           <ThemeToggle />
@@ -82,7 +80,7 @@ export default function Hero() {
             <Image
               src="/me.jpg"
               alt="Fotografie profil Cătălin Bera"
-              width={144} // dimensiune optimă pentru desktop
+              width={144}
               height={144}
               className="rounded-full object-cover border border-white/30 shadow-[0_0_20px_rgba(255,255,255,0.35)]"
               priority
@@ -115,6 +113,39 @@ export default function Hero() {
           </div>
         </div>
       </section>
+
+      {/* ================= PROJECTS ================= */}
+      <section id="projects" className="space-x-section w-full min-h-screen flex flex-col justify-center items-center pt-32 px-4">
+        <h2 className="text-5xl font-semibold mb-10 dark:text-white text-center">Proiectele mele</h2>
+        <div className="w-full flex justify-center">
+          <Carousel />
+        </div>
+      </section>
+
+      {/* ================= CONTACT ================= */}
+      <section id="contact" className="space-x-section w-full min-h-screen flex justify-center items-start pt-32 px-4">
+        <div className="container w-full max-w-4xl">
+          <ContactPage />
+        </div>
+      </section>
+
+      {/* ================= FOOTER ================= */}
+      <footer className="w-full bg-neutral-900/80 dark:bg-black/80 text-gray-400 dark:text-gray-300 py-6 px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p className="text-sm text-center sm:text-left">
+          &copy; {new Date().getFullYear()} - Toate drepturile sunt rezervate
+        </p>
+        <div className="flex gap-4">
+          <a href="https://github.com/beracatalin/" aria-label="GitHub" className="hover:text-white transition">
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/bera-catalin-640488207/" aria-label="LinkedIn" className="hover:text-white transition">
+            LinkedIn
+          </a>
+          <a href="https://www.instagram.com/beracatalin/" aria-label="Instagram" className="hover:text-white transition">
+            Instagram
+          </a>
+        </div>
+      </footer>
     </>
   );
 }
