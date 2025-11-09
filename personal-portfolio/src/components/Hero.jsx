@@ -12,19 +12,20 @@ export default function Hero() {
       <section
         id="hero"
         className="relative w-full min-h-screen flex flex-col justify-center items-center px-4 text-center"
+        aria-label="Secțiunea Hero"
       >
         {/* Background */}
         <div className="fixed w-full h-full inset-0 -z-50">
           <Image
             src="/background/light.png"
-            alt="Fundal light"
+            alt="Fundal luminos"
             fill
             className="object-cover dark:opacity-0 transition-opacity duration-1000"
             priority
           />
           <Image
             src="/background/dark.png"
-            alt="Fundal dark"
+            alt="Fundal întunecat"
             fill
             className="object-cover opacity-0 dark:opacity-100 transition-opacity duration-1000"
             priority
@@ -33,11 +34,15 @@ export default function Hero() {
 
         {/* Theme Toggle */}
         <span className="fixed top-4 sm:top-6 md:top-10 right-4 z-50">
-          <ThemeToggle />
+          <ThemeToggle aria-label="Comutator temă" />
         </span>
 
         {/* Titlu */}
-        <h1 className="text-3xl md:text-4xl font-sans font-bold leading-relaxed text-gray-900 dark:text-white" role="heading" aria-level={1}>
+        <h1
+          className="text-3xl md:text-4xl font-sans font-bold leading-relaxed text-gray-900 dark:text-white"
+          role="heading"
+          aria-level={1}
+        >
           Salutare! Eu sunt <strong>Cătălin</strong>, <br className="hidden md:block" />
           absolvent de licență și master în domeniul IT.
         </h1>
@@ -68,9 +73,11 @@ export default function Hero() {
       <section
         id="about"
         className="space-x-section w-full min-h-screen flex justify-center items-start pt-32 px-5"
+        aria-label="Despre mine"
       >
         <div className="container max-w-3xl">
-          <h2 className="text-4xl md:text-5xl font-semibold mb-10 dark:text-white text-center md:text-left">
+          <h2 className="text-4xl md:text-5xl font-semibold mb-10 dark:text-white text-center md:text-left"
+              role="heading" aria-level={2}>
             Despre Mine
           </h2>
 
@@ -88,7 +95,9 @@ export default function Hero() {
 
             {/* Text */}
             <div className="flex flex-col gap-3 dark:text-white text-center md:text-left">
-              <h3 className="text-2xl md:text-3xl font-semibold">Cătălin Bera</h3>
+              <h3 className="text-2xl md:text-3xl font-semibold" role="heading" aria-level={3}>
+                Cătălin Bera
+              </h3>
 
               <p className="dark:text-gray-300 text-sm md:text-base leading-relaxed max-w-xl">
                 Absolvent de licență și master în IT, pasionat de dezvoltare web, inovație și soluții accesibile pentru toată lumea.
@@ -115,33 +124,35 @@ export default function Hero() {
       </section>
 
       {/* ================= PROJECTS ================= */}
-      <section id="projects" className="space-x-section w-full min-h-screen flex flex-col justify-center items-center pt-32 px-4">
-        <h2 className="text-5xl font-semibold mb-10 dark:text-white text-center">Proiectele mele</h2>
+      <section id="projects" className="space-x-section w-full min-h-screen flex flex-col justify-center items-center pt-32 px-4" aria-label="Proiectele mele">
+        <h2 className="text-5xl font-semibold mb-10 dark:text-white text-center" role="heading" aria-level={2}>
+          Proiectele mele
+        </h2>
         <div className="w-full flex justify-center">
           <Carousel />
         </div>
       </section>
 
       {/* ================= CONTACT ================= */}
-      <section id="contact" className="space-x-section w-full min-h-screen flex justify-center items-start pt-32 px-4">
+      <section id="contact" className="space-x-section w-full min-h-screen flex justify-center items-start pt-32 px-4" aria-label="Contact">
         <div className="container w-full max-w-4xl">
           <ContactPage />
         </div>
       </section>
 
       {/* ================= FOOTER ================= */}
-      <footer className="w-full bg-neutral-900/80 dark:bg-black/80 text-gray-400 dark:text-gray-300 py-6 px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p className="text-sm text-center sm:text-left">
+      <footer className="w-full bg-neutral-900/80 dark:bg-black/80 text-gray-400 dark:text-gray-300 py-6 px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-4" aria-label="Footer site">
+        <p className="text-sm flex justify-center items-center text-center sm:text-left">
           &copy; {new Date().getFullYear()} - Toate drepturile sunt rezervate
         </p>
         <div className="flex gap-4">
-          <a href="https://github.com/beracatalin/" aria-label="GitHub" className="hover:text-white transition">
+          <a href="https://github.com/beracatalin/" aria-label="GitHub" className="hover:text-white transition focus:outline-none focus:ring-2 focus:ring-white/50">
             GitHub
           </a>
-          <a href="https://www.linkedin.com/in/bera-catalin-640488207/" aria-label="LinkedIn" className="hover:text-white transition">
+          <a href="https://www.linkedin.com/in/bera-catalin-640488207/" aria-label="LinkedIn" className="hover:text-white transition focus:outline-none focus:ring-2 focus:ring-white/50">
             LinkedIn
           </a>
-          <a href="https://www.instagram.com/beracatalin/" aria-label="Instagram" className="hover:text-white transition">
+          <a href="https://www.instagram.com/beracatalin/" aria-label="Instagram" className="hover:text-white transition focus:outline-none focus:ring-2 focus:ring-white/50">
             Instagram
           </a>
         </div>
