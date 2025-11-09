@@ -113,6 +113,26 @@ export default function Hero() {
           <ContactPage />
         </div>
       </section>
+      <footer className="w-full bg-neutral-900/80 dark:bg-black/80 text-gray-400 dark:text-gray-300 py-6 px-4 sm:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+  {/* Copyright */}
+  <p className="text-sm text-center sm:text-left">
+    &copy; {new Date().getFullYear()} - Toate drepturile sunt rezervate
+  </p>
+
+  {/* Link-uri sociale (opțional) */}
+  <div className="flex gap-4">
+    <a href="https://github.com/beracatalin/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+      GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/bera-catalin-640488207/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+      LinkedIn
+    </a>
+    <a href="https://www.instagram.com/beracatalin/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">
+      Instagram
+    </a>
+  </div>
+</footer>
+
     </>
   );
 }
