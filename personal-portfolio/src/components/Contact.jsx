@@ -7,6 +7,25 @@ export default function ContactPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com)$/;
+
+    // Verificare nume și mesaj (nu doar spații)
+    if (form.name.trim() === "" || form.message.trim() === "") {
+      setStatus("Te rog completează numele și mesajul ❌");
+      return;
+    }
+
+  if (form.message.length < 10) {
+    setStatus("Mesajul trebuie să aibă cel puțin 10 caractere ❌");
+    return;
+  }
+    // Verificare email doar pentru domeniile permise
+    if (!emailRegex.test(form.email)) {
+      setStatus("Te rog folosește un email valid (gmail.com, yahoo.com, outlook.com) ❌");
+      return;
+    }
+
     setStatus("Se trimite...");
 
     const res = await fetch("/api/contact", {

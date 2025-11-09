@@ -35,7 +35,7 @@ export default function Navbar() {
       </nav>
 
       {/* ---------------- MOBILE NAVBAR ---------------- */}
-      <nav className="md:hidden fixed top-5 left-5 z-[9999]">
+      <nav className="md:hidden fixed top-5 left-5 z-9999">
         {/* Buton glassy */}
         <button
           onClick={() => setOpen(!open)}
