@@ -6,16 +6,27 @@ export const metadata = {
   description: "Explore my Portfolio, with projects in AngularJS, React, NextJS, UI/UX",
   keywords: ["Web Developer", "React", "Next.js", "TailwindCSS", "Portfolio", "UI/UX"],
   authors: [{ name: "Catalin" }],
+  
+  // <-- Adaugă asta
+  metadataBase: new URL("https://cata-space.vercel.app/"),
+
   openGraph: {
     title: "Catalin Portfolio",
     description: "Check out my projects and skills in web development and design.",
     url: "https://cata-space.vercel.app/",
     siteName: "Cata Space",
-    images: [{ url: "/me.jpg", width: 300, height: 300 }], //imagina care apare cand dai pe social media
-    locale: "en_US",
+    images: [{ url: "/me.jpg", width: 300, height: 300 }], // imagine social media
     type: "website",
   },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Catalin Portfolio",
+    description: "Check out my projects and skills in web development and design.",
+    images: ["/me.jpg"], // va folosi metadataBase pentru URL complet
+  },
 };
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
