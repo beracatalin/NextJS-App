@@ -11,7 +11,7 @@ export const metadata = {
     description: "Check out my projects and skills in web development and design.",
     url: "https://cata-space.vercel.app/",
     siteName: "Cata Space",
-    images: [{ url: "/me.jpg", width: 600, height: 600 }], //imagina care apare cand dai pe social media
+    images: [{ url: "/me.jpg", width: 300, height: 300 }], //imagina care apare cand dai pe social media
     locale: "en_US",
     type: "website",
   },
