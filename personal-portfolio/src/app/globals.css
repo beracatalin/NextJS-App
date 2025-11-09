@@ -8,6 +8,7 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
+    scroll-behavior: smooth;
   }
 }
 
@@ -34,4 +35,6 @@
 }
 .space-x-section{
   padding-inline: 72px;
+  display: flex;
+  flex-direction: column;
 }
