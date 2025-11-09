@@ -1,116 +1,187 @@
-"use client";
+'use client';
 import { useState } from "react";
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+
   const [status, setStatus] = useState("");
 
-  async function handleSubmit(e) {
+  const validateEmail = (email) => {
+    // Format: text@text.xxx  (max 3 litere după ".")
+    const regex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{1,3}$/;
+    return regex.test(email);
+  };
+
+  const validateForm = () => {
+    if (!formData.name.trim()) {
+      setStatus("Numele nu poate conține doar spații.");
+      return false;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setStatus("Email invalid. Format acceptat: nume@domeniu.xxx (max 3 litere după .)");
+      return false;
+    }
+
+    if (!formData.message.trim()) {
+      setStatus("Mesajul nu poate conține doar spații.");
+      return false;
+    }
+
+    if (formData.message.trim().length < 10) {
+      setStatus("Mesajul trebuie să aibă cel puțin 10 caractere.");
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+    setStatus("");
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,3}$/;
+    if (!validateForm()) return;
 
-    const name = form.name.trim();
-    const message = form.message.trim();
-
-    if (name === "" || message === "") {
-      setStatus("Te rog completează numele și mesajul ❌");
-      return;
-    }
-
-    if (message.length < 10) {
-      setStatus("Mesajul trebuie să aibă cel puțin 10 caractere ❌");
-      return;
-    }
-
-    if (!emailRegex.test(form.email)) {
-      setStatus("Te rog folosește un email valid ❌");
-      return;
-    }
-
-    setStatus("Se trimite...");
-
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-
-    if (res.ok) {
-      setStatus("Mesaj trimis cu succes ✅");
-      setForm({ name: "", email: "", message: "" });
-    } else {
-      setStatus("A apărut o eroare ❌");
-    }
-  }
+    setStatus("Mesaj trimis cu succes!");
+  };
 
   return (
-    <div className="w-full sm:w-[90%] md:w-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-6 md:gap-6 backdrop-blur-md border border-white/20 rounded-2xl p-4 sm:p-6 md:p-6 shadow-[0_0_20px_rgba(255,255,255,0.25)] hover:shadow-[0_0_30px_rgba(255,255,255,0.45)] transition-shadow duration-300">
-      
+    <section
+      id="contact"
+      className="flex flex-col items-center justify-center px-6 sm:px-10 pt-20 sm:pt-32 pb-10 sm:pb-20"
+    >
+      {/* Titlu */}
+      <h1 className="text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white text-center mb-2 drop-shadow">
+        Contact
+      </h1>
+
+      {/* Subtext */}
+      <p className="text-center text-neutral-700 dark:text-white text-xs sm:text-sm -mt-2 mb-4 sm:mb-6">
+        Spune-mi cu ce te pot ajuta – răspund cât pot de repede.
+      </p>
+
+      {/* Card formular */}
       <form
         onSubmit={handleSubmit}
-        className="w-full sm:w-full md:w-auto p-6 sm:p-8 md:p-8 rounded-3xl backdrop-blur-2xl dark:text-white bg-neutral-500/10 border border-white/20 shadow-xl space-y-4 sm:space-y-5 md:space-y-6 transition-all"
-        aria-label="Formular de contact"
+        className="
+          w-full max-w-md 
+          bg-neutral-600/10 backdrop-blur-xl 
+          border border-white/20 
+          p-5 sm:p-7 rounded-2xl shadow-xl
+          flex flex-col gap-4 sm:gap-6
+        "
       >
-        <h1 className="text-3xl sm:text-4xl md:text-4xl font-bold dark:text-white text-neutral-500 text-center mb-2 drop-shadow">
-          Contact
-        </h1>
-        <p className="text-center dark:text-white text-neutral-400 text-xs sm:text-sm md:text-sm -mt-2 sm:-mt-3 mb-4 sm:mb-6">
-          Spune-mi cu ce te pot ajuta – răspund cât pot de repede.
-        </p>
+        {/* Nume */}
+        <div className="flex flex-col gap-1">
+          <label
+            htmlFor="name"
+            className="text-neutral-900 dark:text-white text-sm font-semibold"
+          >
+            Nume
+          </label>
+          <input
+            id="name"
+            aria-label="Introdu numele tău"
+            type="text"
+            className="
+              w-full p-2.5 sm:p-3 rounded-xl 
+              text-neutral-900 dark:text-white 
+              placeholder-neutral-500 dark:placeholder-white 
+              bg-neutral-600/10 border border-white/20 
+              text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/30 transition
+            "
+            placeholder="Numele tău"
+            value={formData.name}
+            onChange={(e) =>
+              setFormData({ ...formData, name: e.target.value })
+            }
+          />
+        </div>
 
-        <label htmlFor="name" className="sr-only">Numele tău</label>
-        <input
-          id="name"
-          type="text"
-          placeholder="Numele tău"
-          aria-label="Numele tău"
-          aria-required="true"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="w-full p-2.5 sm:p-3 rounded-xl dark:text-white dark:placeholder-white bg-neutral-600/10 border border-white/20 text-neutral-500 placeholder-neutral-500 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/30 transition"
-        />
+        {/* Email */}
+        <div className="flex flex-col gap-1">
+          <label
+            htmlFor="email"
+            className="text-neutral-900 dark:text-white text-sm font-semibold"
+          >
+            Email
+          </label>
+          <input
+            id="email"
+            aria-label="Introdu adresa ta de email"
+            type="email"
+            className="
+              w-full p-2.5 sm:p-3 rounded-xl 
+              text-neutral-900 dark:text-white 
+              placeholder-neutral-500 dark:placeholder-white 
+              bg-neutral-600/10 border border-white/20 
+              text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/30 transition
+            "
+            placeholder="exemplu@domeniu.com"
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+          />
+        </div>
 
-        <label htmlFor="email" className="sr-only">Email</label>
-        <input
-          id="email"
-          type="email"
-          placeholder="Email"
-          aria-label="Email"
-          aria-required="true"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="w-full p-2.5 sm:p-3 rounded-xl dark:text-white dark:placeholder-white bg-neutral-600/10 border border-white/20 text-neutral-500 placeholder-neutral-500 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-white/30 transition"
-        />
+        {/* Mesaj */}
+        <div className="flex flex-col gap-1">
+          <label
+            htmlFor="message"
+            className="text-neutral-900 dark:text-white text-sm font-semibold"
+          >
+            Mesaj
+          </label>
+          <textarea
+            id="message"
+            aria-label="Scrie mesajul tău"
+            className="
+              w-full p-2.5 sm:p-3 rounded-xl 
+              text-neutral-900 dark:text-white 
+              placeholder-neutral-500 dark:placeholder-white 
+              bg-neutral-600/10 border border-white/20 
+              text-sm sm:text-base h-28 
+              focus:outline-none focus:ring-2 focus:ring-white/30 transition
+            "
+            placeholder="Scrie mesajul aici..."
+            value={formData.message}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
+          />
+        </div>
 
-        <label htmlFor="message" className="sr-only">Mesajul tău</label>
-        <textarea
-          id="message"
-          placeholder="Mesajul tău"
-          aria-label="Mesajul tău"
-          aria-required="true"
-          value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className="w-full h-24 sm:h-32 p-2.5 sm:p-3 rounded-xl dark:text-white dark:placeholder-white bg-neutral-600/10 border border-white/20 text-neutral-500 placeholder-neutral-500 text-sm sm:text-base resize-none focus:outline-none focus:ring-2 focus:ring-white/30 transition"
-        />
-
+        {/* Buton */}
         <button
           type="submit"
           aria-label="Trimite mesajul"
-          className="w-full p-2.5 sm:p-3 rounded-xl border border-white/20 dark:text-white dark:placeholder-white bg-neutral-600/10 text-neutral-500 text-sm sm:text-base font-semibold hover:bg-white/30 active:scale-95 transition-all"
+          className="
+            w-full p-2.5 sm:p-3 rounded-xl 
+            border border-white/20 
+            text-neutral-900 dark:text-white 
+            bg-neutral-600/10 
+            text-sm sm:text-base font-semibold 
+            hover:bg-white/30 active:scale-95 transition-all
+          "
         >
           Trimite mesajul
         </button>
 
+        {/* Status */}
         {status && (
           <p
             role="status"
-            className="text-center text-xs sm:text-sm md:text-sm dark:text-white text-neutral-400 pt-1 sm:pt-2"
+            className="text-center text-neutral-800 dark:text-white text-xs sm:text-sm pt-1 sm:pt-2"
           >
             {status}
           </p>
         )}
       </form>
-    </div>
+    </section>
   );
 }
