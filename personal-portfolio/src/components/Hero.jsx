@@ -224,6 +224,7 @@ export default function Hero() {
   "
   aria-label="Secțiune footer"
 >
+  <img className="w-8 h-8 mr-2" src="/CS.svg" alt="Logo"/>
   {/* Text centrat pe toate dimensiunile */}
   <div className="w-full flex justify-center sm:justify-center">
     <p className="text-sm text-center">

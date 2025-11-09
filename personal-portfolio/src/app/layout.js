@@ -30,6 +30,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+            <link rel="icon" href="/CS.svg" type="image/svg+xml" sizes="32x32" />
+      </head>
       <body className="bg-white dark:bg-[#191919] text-[#37352f] dark:text-[#ffffffcf]">
         <ThemeProvider
           attribute="class"
